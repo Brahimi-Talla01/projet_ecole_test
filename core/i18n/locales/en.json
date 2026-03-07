@@ -1,0 +1,20 @@
+{
+      "common": {
+            "welcome": "Welcome - Networking Platform",
+            "loading": "Loading...",
+            "login": "Log in",
+            "register": "Sign In"
+      },
+      "navigation": {
+            "home": "Home",
+            "dashboard": "Dashboard"
+      },
+      "errors": {
+            "network": "Network connection error",
+            "unauthorized": "Unauthorized - Please login"
+      },
+      "validation": {
+            "required": "This field is required",
+            "email": "Invalid email"
+      }
+}

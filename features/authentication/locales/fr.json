@@ -1,0 +1,80 @@
+{
+      "login": {
+            "title": "Connexion",
+            "subtitle": "Connectez-vous à votre compte",
+            "email": "Adresse email",
+            "password": "Mot de passe",
+            "rememberMe": "Se souvenir de moi",
+            "forgotPassword": "Mot de passe oublié ?",
+            "submit": "Se connecter",
+            "noAccount": "Pas encore de compte ?",
+            "createAccount": "Créer un compte",
+            "orContinueWith": "Ou continuer avec"
+      },
+      "register": {
+            "title": "Créer un compte",
+            "subtitle": "Rejoignez notre plateforme gratuitement",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "email": "Adresse email",
+            "password": "Mot de passe",
+            "confirmPassword": "Confirmer le mot de passe",
+            "acceptTerms": "J'accepte les conditions d'utilisation",
+            "submit": "Créer mon compte",
+            "submitting": "Création en cours...",
+            "alreadyHaveAccount": "Déjà un compte ?",
+            "login": "Se connecter",
+            "emailChecking": "Vérification...",
+            "passwordStrength": {
+                  "label": "Force du mot de passe",
+                  "weak": "Faible",
+                  "medium": "Moyen",
+                  "strong": "Fort"
+            }
+            },
+            "validation": {
+            "email": {
+                  "required": "L'email est requis",
+                  "invalid": "Format d'email invalide",
+                  "too_long": "Email trop long"
+            },
+            "password": {
+                  "required": "Le mot de passe est requis",
+                  "min_length": "Le mot de passe doit contenir au moins 8 caractères",
+                  "max_length": "Le mot de passe est trop long",
+                  "uppercase": "Le mot de passe doit contenir au moins une majuscule",
+                  "lowercase": "Le mot de passe doit contenir au moins une minuscule",
+                  "number": "Le mot de passe doit contenir au moins un chiffre",
+                  "special": "Le mot de passe doit contenir au moins un caractère spécial"
+            },
+            "confirmPassword": {
+                  "required": "La confirmation est requise",
+                  "mismatch": "Les mots de passe ne correspondent pas"
+            },
+            "firstName": {
+                  "required": "Le prénom est requis",
+                  "too_long": "Le prénom est trop long"
+            },
+            "lastName": {
+                  "required": "Le nom est requis",
+                  "too_long": "Le nom est trop long"
+            },
+            "acceptTerms": {
+                  "required": "Vous devez accepter les conditions d'utilisation"
+            },
+            "token": {
+                  "required": "Le token est requis"
+            },
+            "otp": {
+                  "length": "Le code doit contenir 6 chiffres",
+                  "digits_only": "Le code doit contenir uniquement des chiffres"
+            }
+      },
+
+      "messages": {
+            "loginSuccess": "Connexion réussie",
+            "loginError": "Email ou mot de passe incorrect",
+            "registerSuccess": "Compte créé avec succès",
+            "logoutSuccess": "Déconnexion réussie"
+      }
+}

@@ -1,0 +1,20 @@
+{
+      "common": {
+            "welcome": "Bienvenue - Plateforme de mise en relation",
+            "loading": "Chargement...",
+            "login": "Se connecter",
+            "register": "Créer un compte"
+      },
+      "navigation": {
+            "home": "Accueil",
+            "dashboard": "Tableau de bord"
+      },
+      "errors": {
+            "network": "Erreur de connexion réseau",
+            "unauthorized": "Non autorisé - Veuillez vous connecter"
+      },
+      "validation": {
+            "required": "Ce champ est obligatoire",
+            "email": "Email invalide"
+      }
+}

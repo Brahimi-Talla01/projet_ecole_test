@@ -1,0 +1,81 @@
+{
+      "login": {
+            "title": "Login",
+            "subtitle": "Sign in to your account",
+            "email": "Email address",
+            "password": "Password",
+            "rememberMe": "Remember me",
+            "forgotPassword": "Forgot password?",
+            "submit": "Sign in",
+            "noAccount": "Don't have an account?",
+            "createAccount": "Create account",
+            "orContinueWith": "Or continue with"
+      },
+      
+      "register": {
+            "title": "Create an account",
+            "subtitle": "Join our platform for free",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email address",
+            "password": "Password",
+            "confirmPassword": "Confirm password",
+            "acceptTerms": "I agree to the terms of service",
+            "submit": "Create my account",
+            "submitting": "Creating account...",
+            "alreadyHaveAccount": "Already have an account?",
+            "login": "Sign in",
+            "emailChecking": "Checking...",
+            "passwordStrength": {
+                  "label": "Password strength",
+                  "weak": "Weak",
+                  "medium": "Medium",
+                  "strong": "Strong"
+            }
+            },
+            "validation": {
+            "email": {
+                  "required": "Email is required",
+                  "invalid": "Invalid email format",
+                  "too_long": "Email is too long"
+            },
+            "password": {
+                  "required": "Password is required",
+                  "min_length": "Password must be at least 8 characters",
+                  "max_length": "Password is too long",
+                  "uppercase": "Password must contain at least one uppercase letter",
+                  "lowercase": "Password must contain at least one lowercase letter",
+                  "number": "Password must contain at least one number",
+                  "special": "Password must contain at least one special character"
+            },
+            "confirmPassword": {
+                  "required": "Please confirm your password",
+                  "mismatch": "Passwords do not match"
+            },
+            "firstName": {
+                  "required": "First name is required",
+                  "too_long": "First name is too long"
+            },
+            "lastName": {
+                  "required": "Last name is required",
+                  "too_long": "Last name is too long"
+            },
+            "acceptTerms": {
+                  "required": "You must accept the terms of service"
+            },
+            "token": {
+                  "required": "Token is required"
+            },
+            "otp": {
+                  "length": "Code must be 6 digits",
+                  "digits_only": "Code must contain digits only"
+            }
+      },
+    
+      "messages": {
+            "loginSuccess": "Login successful",
+            "loginError": "Invalid email or password",
+            "registerSuccess": "Account created successfully",
+            "logoutSuccess": "Logout successful"
+      }
+}
