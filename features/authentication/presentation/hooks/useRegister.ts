@@ -73,8 +73,7 @@ export function useRegister(): UseRegisterReturn {
 
       debounceTimerRef.current = setTimeout(async () => {
         try {
-          const isAvailable =
-            await authRepository.checkEmailAvailability(email);
+          const isAvailable = await authRepository.checkEmailAvailability(email);
 
           if (!isAvailable) {
             setError("email", {
