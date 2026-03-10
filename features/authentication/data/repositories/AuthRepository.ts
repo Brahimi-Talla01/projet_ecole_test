@@ -1,15 +1,11 @@
 import { apiClient } from '@/core/api/client';
 import { API_ROUTES } from '@/core/config/routes';
 import { IAuthRepository } from '../../domain/repositories/IAuthRepository';
-import { LoginDto, LoginResponseDto } from '../dtos/LoginDto';
+import { LoginDto, LoginResponseDto, UserDto } from '../dtos/LoginDto';
 import { RegisterDto, RegisterResponseDto } from '../dtos/RegisterDto';
 
 
 // Types internes
-/**
- * Réponse du endpoint de vérification d'email.
- * @mock Adapter selon le contrat API définitif (POST {email} possible).
- */
 interface CheckEmailResponse {
       available: boolean;
 }
@@ -53,7 +49,13 @@ export class AuthRepository implements IAuthRepository {
       async refreshToken(): Promise<void> {
             await apiClient.post(API_ROUTES.AUTH_REFRESH);
       }
+
+      // Récupère le profil de l'utilisateur connecté
+      async getMe(): Promise<UserDto> {
+            const response = await apiClient.get<UserDto>(API_ROUTES.AUTH_ME);
+            return response.data;
+      }
 }
 
-// Instance partagée dans toute l'app
+// Instance 
 export const authRepository = new AuthRepository();

@@ -83,3 +83,8 @@ export const ERROR_MESSAGES = {
   VALIDATION_ERROR: 'Données invalides',
   UNKNOWN_ERROR: 'Une erreur inattendue est survenue',
 } as const;
+
+export const BRUTE_FORCE_CONFIG = {
+      MAX_ATTEMPTS: 5,
+      LOCKOUT_DURATION_MS: 15 * 60 * 1000,
+} as const;

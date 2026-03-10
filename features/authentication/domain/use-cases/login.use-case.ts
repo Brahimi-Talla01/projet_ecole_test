@@ -1,49 +1,69 @@
 import { IAuthRepository } from '../repositories/IAuthRepository';
 import { LoginDto, LoginResponseDto } from '../../data/dtos/LoginDto';
-import { User } from '../entities/User';
-import { UserMapper } from '../../data/mappers/user.mapper';
+import { ApiError } from '@/core/api/types/api-response';
 
-export interface LoginResult {
-      user: User;
-      message: string;
+// Types
+export interface LoginUseCaseResult {
+      success: boolean;
+      data?: LoginResponseDto;
+      isLocked?: boolean;   // 429 — backend a bloqué le compte
+      error?: string;
 }
 
+// Use Case
 export class LoginUseCase {
-      constructor(private authRepository: IAuthRepository) {}
+      constructor(private readonly authRepository: IAuthRepository) {}
 
-      async execute(email: string, password: string): Promise<LoginResult> {
-
-            // Validation métier
-            this.validateCredentials(email, password);
-
-            // Préparer les données
-            const data: LoginDto = {
-                  email: email.toLowerCase().trim(),
-                  password,
-            };
-
-            // Appeler le repository
-            const response = await this.authRepository.login(data);
-
-            // Mapper l'utilisateur
-            const user = UserMapper.toDomain(response.user);
-
-            return {
-                  user,
-                  message: response.message,
-            };
+      async execute(data: LoginDto): Promise<LoginUseCaseResult> {
+            try {
+                  const response = await this.authRepository.login(data);
+                  return { success: true, data: response };
+            } catch (error: unknown) {
+                  return this.handleError(error);
+            }
       }
 
+      // Gestion d'erreurs
+      private handleError(error: unknown): LoginUseCaseResult {
+            const apiError = error as Partial<ApiError>;
 
-      // Valide les credentials
-      private validateCredentials(email: string, password: string): void {
-            if (!email || !password) {
-                  throw new Error('Email et mot de passe requis');
-            }
+            switch (apiError.statusCode) {
+                  case 401:
+                  case 403:
+                        // Message VOLONTAIREMENT générique — ne pas révéler
+                        // si c'est l'email ou le mot de passe qui est incorrect
+                        return {
+                        success: false,
+                        error: 'Identifiants incorrects. Veuillez réessayer.',
+                  };
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                  throw new Error('Format d\'email invalide');
+                  case 429:
+                        return {
+                              success: false,
+                              isLocked: true,
+                              error: 'Trop de tentatives. Votre accès est temporairement bloqué.',
+                        };
+
+                  case 503:
+                        return {
+                              success: false,
+                              error:
+                                    apiError.message ??
+                                    'Impossible de joindre le serveur. Vérifiez votre connexion.',
+                        };
+
+                  default:
+                        if (apiError.statusCode && apiError.statusCode >= 500) {
+                              return {
+                                    success: false,
+                                    error: 'Une erreur serveur est survenue. Veuillez réessayer.',
+                              };
+                        }
+
+                        return {
+                              success: false,
+                              error: apiError.message ?? 'Une erreur inattendue est survenue.',
+                        };
             }
       }
 }

@@ -1,16 +1,4 @@
 {
-      "login": {
-            "title": "Connexion",
-            "subtitle": "Connectez-vous à votre compte",
-            "email": "Adresse email",
-            "password": "Mot de passe",
-            "rememberMe": "Se souvenir de moi",
-            "forgotPassword": "Mot de passe oublié ?",
-            "submit": "Se connecter",
-            "noAccount": "Pas encore de compte ?",
-            "createAccount": "Créer un compte",
-            "orContinueWith": "Ou continuer avec"
-      },
       "register": {
             "title": "Créer un compte",
             "subtitle": "Rejoignez notre plateforme gratuitement",
@@ -31,8 +19,25 @@
                   "medium": "Moyen",
                   "strong": "Fort"
             }
-            },
-            "validation": {
+      },
+
+      "login": {
+            "title": "Se connecter",
+            "subtitle": "Bienvenue, entrez vos identifiants",
+            "email": "Adresse email",
+            "password": "Mot de passe",
+            "submit": "Se connecter",
+            "submitting": "Connexion en cours...",
+            "forgotPassword": "Mot de passe oublié ?",
+            "noAccount": "Pas encore de compte ?",
+            "register": "S'inscrire",
+            "showPassword": "Afficher le mot de passe",
+            "hidePassword": "Masquer le mot de passe",
+            "lockedCountdown": "Réessayez dans",
+            "attemptsWarning": "Encore remaining tentative(s) avant blocage temporaire."
+      },
+
+      "validation": {
             "email": {
                   "required": "L'email est requis",
                   "invalid": "Format d'email invalide",
@@ -69,12 +74,5 @@
                   "length": "Le code doit contenir 6 chiffres",
                   "digits_only": "Le code doit contenir uniquement des chiffres"
             }
-      },
-
-      "messages": {
-            "loginSuccess": "Connexion réussie",
-            "loginError": "Email ou mot de passe incorrect",
-            "registerSuccess": "Compte créé avec succès",
-            "logoutSuccess": "Déconnexion réussie"
       }
 }

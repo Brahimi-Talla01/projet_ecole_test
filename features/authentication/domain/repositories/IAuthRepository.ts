@@ -1,5 +1,5 @@
 import { RegisterDto, RegisterResponseDto } from '../../data/dtos/RegisterDto';
-import { LoginDto, LoginResponseDto } from '../../data/dtos/LoginDto';
+import { LoginDto, LoginResponseDto, UserDto } from '../../data/dtos/LoginDto';
 
 export interface IAuthRepository {
 
@@ -12,5 +12,7 @@ export interface IAuthRepository {
       logout(): Promise<void>;
 
       refreshToken(): Promise<void>;
+
+      getMe(): Promise<UserDto>;
 
 }
