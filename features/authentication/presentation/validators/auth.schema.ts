@@ -2,9 +2,6 @@ import { z } from "zod";
 import { VALIDATION_CONFIG } from "@/core/config/constants";
 import { Language } from "../../domain/entities/enums";
 
-
-// Schémas primitifs 
-
 export const emailSchema = z
   .string()
   .min(1, { message: "validation.email.required" })
@@ -41,13 +38,6 @@ export const loginSchema = z.object({
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 
-
-// Register
-//
-// profileType est exclu du formulaire : tout nouvel utilisateur
-// est CUSTOMER par défaut. La valeur est injectée dans useRegister
-// avant l'appel API, sans intervention de l'utilisateur.
-
 export const registerSchema = z
   .object({
     firstName: z
@@ -61,6 +51,9 @@ export const registerSchema = z
       .max(50, { message: "validation.lastName.too_long" })
       .trim(),
     email: emailSchema,
+    phoneNumber: z.number,
+    city: z.string,
+    country: z.string,
     password: passwordSchema,
     confirmPassword: z
       .string()
