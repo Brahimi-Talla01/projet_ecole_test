@@ -15,7 +15,7 @@ export const apiClient = axios.create({
       baseURL: env.apiUrl,
       timeout: API_CONFIG.TIMEOUT,
       headers: {
-      'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
       },
       withCredentials: true, 
 });
@@ -46,7 +46,7 @@ apiClient.interceptors.response.use(
 if (env.isDev) {
       apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
             console.log(
-                  `[API] ← ${config.method?.toUpperCase()} ${config.url}`,
+                  `[API] ${config.method?.toUpperCase()} ${config.url}`,
                   config.data ?? '',
             );
             return config;
@@ -55,13 +55,13 @@ if (env.isDev) {
       apiClient.interceptors.response.use(
             (response: AxiosResponse) => {
                   console.log(
-                        `[API] → ${response.status} ${response.config.url}`,
+                        `[API] ${response.status} ${response.config.url}`,
                   );
                   return response;
             },
             (error) => {
                   console.error(
-                        `[API] ✕ ${error.response?.status ?? 'NETWORK'} ${error.config?.url ?? ''}`,
+                        `[API] ${error.response?.status ?? 'NETWORK'} ${error.config?.url ?? ''}`,
                         error.message,
                   );
                   return Promise.reject(error);

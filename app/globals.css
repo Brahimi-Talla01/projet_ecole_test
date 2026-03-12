@@ -1,2 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @import "tailwindcss";
 
+@theme {
+  /* Success */
+  --color-success-50: #f1f9f2;
+  --color-success-100: #d3ecd6;
+  --color-success-200: #b5dfbb;
+  --color-success-300: #96d39f;
+  --color-success-400: #78c684;
+  --color-success-500: #5ab968;
+  --color-success-600: #45a353;
+  --color-success-700: #398544;
+  --color-success-800: #2d6a36;
+  --color-success-900: #1f4925;
+  --color-success-950: #122b16;
+
+  /* Primary */
+  --color-primary-50: #effbf5;
+  --color-primary-100: #cdf2df;
+  --color-primary-200: #abe9c9;
+  --color-primary-300: #89e0b3;
+  --color-primary-400: #67d79d;
+  --color-primary-500: #4ad08a;
+  --color-primary-600: #30b971;
+  --color-primary-700: #27975c;
+  --color-primary-800: #1e7548;
+  --color-primary-900: #155333;
+  --color-primary-950: #0d311e;
+
+  /* Secondary */
+  --color-secondary-50: #fdf3ed;
+  --color-secondary-100: #f9d9c6;
+  --color-secondary-200: #f5bf9f;
+  --color-secondary-300: #f1a578;
+  --color-secondary-400: #ed8b52;
+  --color-secondary-500: #e86e27;
+  --color-secondary-600: #d25b16;
+  --color-secondary-700: #ab4b12;
+  --color-secondary-800: #853a0e;
+  --color-secondary-900: #5e290a;
+  --color-secondary-950: #371806;
+
+  /* Gris / Neutral */
+  --color-gris-50: #f3f5f6;
+  --color-gris-100: #dadee5;
+  --color-gris-200: #c1c8d3;
+  --color-gris-300: #a8b2c1;
+  --color-gris-400: #8f9caf;
+  --color-gris-500: #77869d;
+  --color-gris-600: #64748b;
+  --color-gris-700: #4f5c6e;
+  --color-gris-800: #3d4755;
+  --color-gris-900: #2c323d;
+  --color-gris-950: #1a1e24;
+
+  /* Errors */
+  --color-error-50: #fff1f1;
+  --color-error-100: #ffd7d7;
+  --color-error-200: #ffb3b3;
+  --color-error-300: #ff8080;
+  --color-error-400: #ff4d4d;
+  --color-error-500: #f03c3c;
+  --color-error-600: #d42a2a;
+  --color-error-700: #aa1f1f;
+  --color-error-800: #851616;
+  --color-error-900: #5e0f0f;
+  --color-error-950: #370808;
+
+  /* Espacements */
+  --spacing-0: 0px;
+  --spacing-05: 2px;
+  --spacing-1: 4px;
+  --spacing-15: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-18: 72px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-26: 104px;
+  --spacing-28: 112px;
+  --spacing-32: 128px;
+  --spacing-36: 144px;
+  --spacing-40: 160px;
+  --spacing-48: 192px;
+  --spacing-56: 224px;
+  --spacing-64: 256px;
+  --spacing-72: 288px;
+  --spacing-80: 320px;
+  --spacing-96: 384px;
+  --spacing-104: 416px;
+  --spacing-120: 480px;
+  --spacing-140: 560px;
+  --spacing-144: 576px;
+  --spacing-160: 640px;
+  --spacing-180: 720px;
+  --spacing-192: 768px;
+  --spacing-256: 1024px;
+  --spacing-320: 1280px;
+  --spacing-360: 1440px;
+  --spacing-400: 1600px;
+  --spacing-480: 1920px;
+
+  /* Breakpoints */
+  --breakpoint-tab: 768px;
+  --breakpoint-web: 1280px;
+}
+
+@layer utilities {
+  .font-outfit {
+    font-family: "Poppins", sans-serif;
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+@layer components {
+  .btn-loader {
+    width: 24px;
+    aspect-ratio: 1;
+    display: grid;
+    border-radius: 50%;
+    background:
+      linear-gradient(0deg, currentColor  30%, #0000 0 70%, currentColor 0)
+        50%/8% 100%,
+      linear-gradient(90deg, currentColor 30%, #0000 0 70%, currentColor 0)
+        50%/100% 8%;
+    background-repeat: no-repeat;
+    animation: l23 3s infinite steps(12);
+  }
+  .btn-loader::before,
+  .btn-loader::after {
+    content: "";
+    grid-area: 1/1;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.915;
+    transform: rotate(30deg);
+  }
+  .btn-loader::after {
+    opacity: 0.83;
+    transform: rotate(60deg);
+  }
+  @keyframes l23 {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+}

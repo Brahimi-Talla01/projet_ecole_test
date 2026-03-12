@@ -1,17 +1,4 @@
 {
-      "login": {
-            "title": "Login",
-            "subtitle": "Sign in to your account",
-            "email": "Email address",
-            "password": "Password",
-            "rememberMe": "Remember me",
-            "forgotPassword": "Forgot password?",
-            "submit": "Sign in",
-            "noAccount": "Don't have an account?",
-            "createAccount": "Create account",
-            "orContinueWith": "Or continue with"
-      },
-      
       "register": {
             "title": "Create an account",
             "subtitle": "Join our platform for free",
@@ -32,8 +19,25 @@
                   "medium": "Medium",
                   "strong": "Strong"
             }
-            },
-            "validation": {
+      },
+
+      "login": {
+            "title": "Sign in",
+            "subtitle": "Welcome back, enter your credentials",
+            "email": "Email address",
+            "password": "Password",
+            "submit": "Sign in",
+            "submitting": "Signing in...",
+            "forgotPassword": "Forgot password?",
+            "noAccount": "Don't have an account?",
+            "register": "Sign up",
+            "showPassword": "Show password",
+            "hidePassword": "Hide password",
+            "lockedCountdown": "Try again in",
+            "attemptsWarning": "remaining attempt(s) remaining before temporary lockout."
+      },
+
+      "validation": {
             "email": {
                   "required": "Email is required",
                   "invalid": "Invalid email format",
@@ -70,12 +74,5 @@
                   "length": "Code must be 6 digits",
                   "digits_only": "Code must contain digits only"
             }
-      },
-    
-      "messages": {
-            "loginSuccess": "Login successful",
-            "loginError": "Invalid email or password",
-            "registerSuccess": "Account created successfully",
-            "logoutSuccess": "Logout successful"
       }
 }

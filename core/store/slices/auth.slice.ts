@@ -1,68 +1,92 @@
 import { StateCreator } from 'zustand';
 import { User } from '@/features/authentication/domain/entities/User';
 
+// Constants
+export const BRUTE_FORCE_CONFIG = {
+  MAX_ATTEMPTS: 5,
+  LOCKOUT_DURATION_MS: 15 * 60 * 1000,
+} as const;
 
+// Types
 export interface AuthSlice {
-      // État
-      user: User | null;
+      // État utilisateur
       isAuthenticated: boolean;
-      isLoading: boolean;
-      
-      // Actions
+      user: User | null;
+      isLoadingSession: boolean; 
+
+      //  État brute force 
+      failedAttempts: number;
+      lockedUntil: number | null;
+
+      //  Actions auth 
+      setAuthenticated: (value: boolean) => void;
       setUser: (user: User | null) => void;
-      setLoading: (loading: boolean) => void;
-      logout: () => void;
-      
-      // Getters helpers
-      isCustomer: () => boolean;
-      isProvider: () => boolean;
-      hasVerifiedEmail: () => boolean;
+      setLoadingSession: (value: boolean) => void;
+      clearSession: () => void; 
+
+      //  Actions brute force 
+      recordFailedAttempt: () => void;
+      lockAccount: () => void;
+      resetAttempts: () => void;
+      isLocked: () => boolean;
+      getRemainingLockMs: () => number;
 }
 
+// Slice
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set, get) => ({
-      // État initial
-      user: null,
+      //  État initial 
       isAuthenticated: false,
-      isLoading: false,
+      user: null,
+      isLoadingSession: true, 
+      failedAttempts: 0,
+      lockedUntil: null,
 
+      //  Actions auth 
 
-      // Définir l'utilisateur connecté
+      setAuthenticated: (value) => set({ isAuthenticated: value }),
 
-      setUser: (user) =>
-            set({
-                  user,
-                  isAuthenticated: !!user,
-            }),
+      setUser: (user) => set({ user, isAuthenticated: user !== null }),
 
-      // Définir l'état de chargement
-      setLoading: (loading) =>
-            set({
-                  isLoading: loading,
-            }),
+      setLoadingSession: (value) => set({ isLoadingSession: value }),
 
-      // Déconnexion
-      logout: () =>
-            set({
-                  user: null,
-                  isAuthenticated: false,
-            }),
+      clearSession: () => set({ isAuthenticated: false, user: null }),
 
-      // Vérifier si l'utilisateur est un client
-      isCustomer: () => {
-            const { user } = get();
-            return user?.isCustomer() || false;
+      //  Actions brute force 
+
+      recordFailedAttempt: () => {
+            const { failedAttempts } = get();
+            const next = failedAttempts + 1;
+
+            if (next >= BRUTE_FORCE_CONFIG.MAX_ATTEMPTS) {
+                  set({
+                        failedAttempts: next,
+                        lockedUntil: Date.now() + BRUTE_FORCE_CONFIG.LOCKOUT_DURATION_MS,
+                  });
+            } else {
+                  set({ failedAttempts: next });
+            }
       },
 
-      // Vérifier si l'utilisateur est un prestataire
-      isProvider: () => {
-            const { user } = get();
-            return user?.isProvider() || false;
+      lockAccount: () => {
+            set({ lockedUntil: Date.now() + BRUTE_FORCE_CONFIG.LOCKOUT_DURATION_MS });
       },
 
-      // Vérifier si l'email est vérifié
-      hasVerifiedEmail: () => {
-            const { user } = get();
-            return user?.hasVerifiedEmail() || false;
+      resetAttempts: () => set({ failedAttempts: 0, lockedUntil: null }),
+
+      isLocked: () => {
+            const { lockedUntil } = get();
+            if (lockedUntil === null) return false;
+            if (Date.now() >= lockedUntil) {
+                  set({ lockedUntil: null, failedAttempts: 0 });
+                  return false;
+            }
+            return true;
+      },
+
+      getRemainingLockMs: () => {
+            const { lockedUntil } = get();
+            if (lockedUntil === null) return 0;
+            return Math.max(0, lockedUntil - Date.now());
       },
 });

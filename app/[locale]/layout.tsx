@@ -6,6 +6,8 @@ import { Inter } from 'next/font/google';
 import '../globals.css';
 import { Metadata } from 'next';
 import { QueryProvider } from '@/core/providers/Queryprovider';
+import { APP_CONFIG } from '@/core/config/constants';
+import { SessionProvider } from '@/core/providers/SessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -14,8 +16,8 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'SuperApp - Plateforme de services',
-  description: 'Mise en relation entre clients et prestataires',
+  title: APP_CONFIG.NAME,
+  description: APP_CONFIG.DESCRIPTION,
 };
 
 export default async function LocaleLayout({
@@ -39,7 +41,9 @@ export default async function LocaleLayout({
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
-            {children}
+            <SessionProvider>
+              {children}
+            </SessionProvider>
           </QueryProvider>
         </NextIntlClientProvider>
       </body>
