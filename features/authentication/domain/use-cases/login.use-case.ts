@@ -6,7 +6,7 @@ import { ApiError } from '@/core/api/types/api-response';
 export interface LoginUseCaseResult {
       success: boolean;
       data?: LoginResponseDto;
-      isLocked?: boolean;   // 429 — backend a bloqué le compte
+      isLocked?: boolean;
       error?: string;
 }
 
@@ -30,12 +30,10 @@ export class LoginUseCase {
             switch (apiError.statusCode) {
                   case 401:
                   case 403:
-                        // Message VOLONTAIREMENT générique — ne pas révéler
-                        // si c'est l'email ou le mot de passe qui est incorrect
                         return {
-                        success: false,
-                        error: 'Identifiants incorrects. Veuillez réessayer.',
-                  };
+                              success: false,
+                              error: 'Identifiants incorrects. Veuillez réessayer.',
+                        };
 
                   case 429:
                         return {

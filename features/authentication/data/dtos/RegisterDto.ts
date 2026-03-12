@@ -12,5 +12,5 @@ export interface RegisterDto {
 export interface RegisterResponseDto {
       message: string;
       userId: string;
-      keycloakId: string;
+      // keycloakId: string;
 }

@@ -3,7 +3,7 @@ import { AccountStatus, Language, ProfileType } from './enums';
 export class User {
       constructor(
             public readonly id: string, 
-            public readonly keycloakId: string, 
+            // public readonly keycloakId: string, 
             public email: string,
             public emailVerified: boolean,
             public accountStatus: AccountStatus,
