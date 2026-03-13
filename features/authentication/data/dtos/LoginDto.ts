@@ -13,7 +13,7 @@ export interface LoginResponseDto {
 // DTO User reçu de l'API
 export interface UserDto {
       id: string;
-      keycloak_id: string;
+      // keycloak_id: string;
       email: string;
       email_verified: boolean;
       account_status: AccountStatus;

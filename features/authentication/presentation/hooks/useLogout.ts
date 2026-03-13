@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useGlobalStore } from '@/core/store';
 import { authRepository } from '../../data/repositories/AuthRepository';
 
 /**

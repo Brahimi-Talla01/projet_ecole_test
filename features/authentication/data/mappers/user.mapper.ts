@@ -10,7 +10,7 @@ export class UserMapper {
       static toDomain(dto: UserDto): User {
             return new User(
                   dto.id,
-                  dto.keycloak_id,
+                  // dto.keycloak_id,
                   dto.email,
                   dto.email_verified,
                   dto.account_status as AccountStatus,
@@ -27,7 +27,7 @@ export class UserMapper {
       static toDto(user: User): UserDto {
             return {
                   id: user.id,
-                  keycloak_id: user.keycloakId,
+                  // keycloak_id: user.keycloakId,
                   email: user.email,
                   email_verified: user.emailVerified,
                   account_status: user.accountStatus,
