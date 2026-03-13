@@ -38,9 +38,9 @@
             },
 
             "steps": {
-                  "1": "Email",
-                  "2": "Identity",
-                  "3": "Password",
+                  "1": "your basic info",
+                  "2": "Password creation",
+                  "3": "verification Email",
                   "4": "Confirmation"
             },
 

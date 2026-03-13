@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         ].join(' ');
 
         const wrapperStyles = [
-            'relative flex items-center rounded-[8px] border-[1.5px] bg-white transition-all duration-150',
+            'relative flex items-center justify-center rounded-[8px] border-[1.5px] bg-white transition-all duration-150',
             hasError
                 ? 'border-red-500 focus-within:ring-red-200'
                 : 'border-gris-200 focus-within:border-primary-600  focus-within:ring-primary-100',

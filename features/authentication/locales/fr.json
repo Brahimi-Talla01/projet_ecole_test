@@ -34,9 +34,9 @@
                   "confirmPassword": "Confirmez votre mot de passe"
             },
             "steps": {
-                  "1": "E-mail",
-                  "2": "Identité",
-                  "3": "Mot de passe",
+                  "1": "your basic info",
+                  "2": "Password creation",
+                  "3": "verification Email",
                   "4": "Confirmation"
             },
             "step4": {

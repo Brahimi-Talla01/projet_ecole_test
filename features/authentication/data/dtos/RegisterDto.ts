@@ -1,16 +1,21 @@
-import { Language, ProfileType } from "../../domain/entities/enums";
+import { Language } from "../../domain/entities/enums";
 
 export interface RegisterDto {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
-  profileType: ProfileType; 
-  preferredLang?: Language;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  city: string;
+  country: string;
+  preferredLang: Language;
+  acceptTerms: true;
 }
 
 export interface RegisterResponseDto {
-      message: string;
-      userId: string;
-      // keycloakId: string;
+  success: boolean;
+  message: string;
+  data?: {
+    userId?: string;
+  };
 }
