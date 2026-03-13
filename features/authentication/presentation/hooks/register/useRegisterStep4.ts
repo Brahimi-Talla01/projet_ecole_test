@@ -1,43 +1,105 @@
-"use client";
+'use client';
 
+import { useState, useEffect } from 'react';
 import { RegisterStepperState } from '@/shared/types/common.types';
-import { useEffect, useRef } from 'react';
-import { useRegister } from '../useRegister';
-import { RegisterFormData } from '../../validators/auth.schema';
+import { authRepository } from '@/features/authentication/data/repositories/AuthRepository';
 import { Language } from '@/features/authentication/domain/entities/enums';
 
-export function useRegisterStep4(stepper: RegisterStepperState) {
-  const { onSubmit, isSubmitting } = useRegister();
-  const hasSubmitted = useRef(false);
+type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
+
+interface UseRegisterStep4Return {
+  status: SubmitStatus;
+  errorMessage: string | null;
+  handleSendVerification: () => Promise<void>;
+  handleBack: () => void;
+}
+
+export function useRegisterStep4(
+  stepper: RegisterStepperState,
+): UseRegisterStep4Return {
+  const [status, setStatus]           = useState<SubmitStatus>('loading');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (hasSubmitted.current) return;
+    register();
+  }, []);
 
-    const submitRegistration = async () => {
-      const finalData: RegisterFormData = {
-        email: stepper.draft.email || "",
-        firstName: stepper.draft.firstName || "",
-        lastName: stepper.draft.lastName || "",
-        phoneNumber: Number(stepper.draft.phoneNumber) || 0,
-        city: stepper.draft.city || "",
-        country: stepper.draft.country || "",
-        password: stepper.passwordRef.current,
-        confirmPassword: stepper.passwordRef.current,
-        acceptTerms: true,
-        preferredLang: (stepper.draft.preferredLang) as Language,
-      };
+  const register = async () => {
+    const { draft } = stepper;
+    const password = stepper.passwordRef.current;
 
-      try {
-        hasSubmitted.current = true;
-        await onSubmit(finalData);
-        stepper.clearDraft(); 
-      } catch (error) {
-        hasSubmitted.current = false;
+    console.log('draft:', stepper.draft);
+    console.log('password:', stepper.passwordRef.current);
+
+    if (
+      !draft.email ||
+      !draft.firstName ||
+      !draft.lastName ||
+      !draft.phoneNumber ||
+      !draft.city ||
+      !draft.country ||
+      !password
+    ) {
+      setStatus('error');
+      setErrorMessage('Données manquantes. Veuillez recommencer.');
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMessage(null);
+
+    try {
+      await authRepository.register({
+        email:         draft.email,
+        firstName:     draft.firstName,
+        lastName:      draft.lastName,
+        phoneNumber:   draft.phoneNumber,
+        city:          draft.city,
+        country:       draft.country,
+        preferredLang: Language.FR,
+        password,
+        acceptTerms:   true,
+      });
+
+      stepper.passwordRef.current = '';
+      stepper.clearDraft();
+
+      setStatus('success');
+    } catch (error: unknown) {
+      const apiError = error as { statusCode?: number; message?: string };
+
+      if (apiError.statusCode === 409) {
+        stepper.goToStep(0);
+        return;
       }
-    };
 
-    submitRegistration();
-  }, [onSubmit, stepper]);
+      setStatus('error');
+      setErrorMessage(
+        apiError.message ?? 'Une erreur est survenue. Veuillez réessayer.',
+      );
+    }
+  };
 
-  return { isSubmitting };
+  const handleSendVerification = async () => {
+    if (status === 'success') {
+      try {
+        await authRepository.verifyEmail(stepper.draft.email ?? '');
+      } catch {
+      }
+      return;
+    }
+
+    await register();
+  };
+
+  const handleBack = () => {
+    stepper.prevStep();
+  };
+
+  return {
+    status,
+    errorMessage,
+    handleSendVerification,
+    handleBack,
+  };
 }

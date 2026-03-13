@@ -8,15 +8,16 @@ import { Locale } from "@/core/i18n/config";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
-import bg from "@/public/assets/bg.jpeg";
+import background from "@/public/assets/background.svg";
 import google_logo from "@/public/assets/google_logo.webp";
 import { useRegisterStep1 } from "../../../hooks/register/useRegisterStep1";
+import { Input } from "@/core/ui/atoms/Input";
+import { Button } from "@/core/ui/atoms/Button";
+import { RegisterStepperState } from "@/shared/types/common.types";
 
 
 type Props = {
-  stepper: {
-    nextStep: () => void;
-  };
+  stepper: RegisterStepperState;
 };
 
 export const RegisterIntro = ({ stepper }: Props) => {
@@ -28,8 +29,9 @@ export const RegisterIntro = ({ stepper }: Props) => {
   const t = useTranslations("authentication.register");
   const locale = useLocale() as Locale;
 
-  const { handleNext, isChecking } = useRegisterStep1({
+  const { handleNext } = useRegisterStep1({
     onNext: stepper.nextStep,
+    stepper, 
   });
 
   return (
@@ -76,19 +78,16 @@ export const RegisterIntro = ({ stepper }: Props) => {
               {t("fields.email")}
             </label>
 
-            <input
+            <Input
               {...register("email")}
               type="email"
               placeholder={t("placeholders.email")}
               autoComplete="email"
               className={[
-                "w-full rounded-lg border-[1.5px] bg-white",
-                "px-4 py-3.5 text-sm text-gris-900",
-                "placeholder:text-gris-400",
-                "focus:outline-none transition-all duration-150",
+                "w-full",
                 errors.email
                   ? "border-red-500 focus:ring-2 focus:ring-red-200"
-                  : "border-gris-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100",
+                  : "border-gris-200",
               ].join(" ")}
             />
 
@@ -99,26 +98,13 @@ export const RegisterIntro = ({ stepper }: Props) => {
             )}
           </div>
 
-          <button
+          <Button
             type="button"
             onClick={handleNext}
-            disabled={isChecking}
-            className={[
-              "w-full rounded-full py-3 font-semibold text-white",
-              "transition-all duration-150",
-              isChecking
-                ? "bg-gris-300 cursor-not-allowed"
-                : "bg-primary-800 hover:bg-primary-900 cursor-pointer",
-            ].join(" ")}
+            variant="primary"
           >
-            {isChecking ? (
-              <span className="flex items-center justify-center gap-2">
-                <span className="btn-loader text-white" />
-              </span>
-            ) : (
-              t("cta.createAccount")
-            )}
-          </button>
+            {t("cta.createAccount")}
+          </Button>
 
           <p className="text-center text-sm text-gris-600">
             {t("alreadyAccount")}{" "}
@@ -135,7 +121,7 @@ export const RegisterIntro = ({ stepper }: Props) => {
 
       <div className="hidden md:block relative h-screen">
         <Image
-          src={bg}
+          src={background}
           alt=""
           fill
           className="object-cover"
