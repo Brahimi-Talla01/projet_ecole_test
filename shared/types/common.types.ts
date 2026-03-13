@@ -1,6 +1,6 @@
 import { Language } from "@/features/authentication/domain/entities/enums";
 
-export type RegisterStep = 1 | 2 | 3 | 4;
+export type RegisterStep = 0 | 1 | 2 | 3 | 4;
 
 export interface RegisterDraft {
   email: string;

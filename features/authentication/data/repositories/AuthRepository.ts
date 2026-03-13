@@ -31,6 +31,25 @@ export class AuthRepository implements IAuthRepository {
             return response.data.available;
       }
 
+      // Vérification d'email (Validation du compte)
+      async verifyEmail(token: string): Promise<{ success: boolean; error?: string }> {
+            try {
+                  const response = await apiClient.get(
+                        `${API_ROUTES.AUTH_VERIFY_EMAIL}`, 
+                        { params: { token } }
+                  );
+
+                  return { 
+                        success: response.status === 200 || response.status === 204 
+                  };
+            } catch (error: any) {
+                  return { 
+                        success: false, 
+                        error: error.response?.data?.message || "Token invalide ou expiré" 
+                  };
+            }
+      }
+
       // Connexion 
       async login(data: LoginDto): Promise<LoginResponseDto> {
             const response = await apiClient.post<LoginResponseDto>(

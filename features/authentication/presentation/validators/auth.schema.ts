@@ -51,9 +51,11 @@ export const registerSchema = z
       .max(50, { message: "validation.lastName.too_long" })
       .trim(),
     email: emailSchema,
-    phoneNumber: z.number,
-    city: z.string,
-    country: z.string,
+    phoneNumber: z
+      .string()
+      .regex(/^(0[1-9])([0-9]{8})$/, { message: "Le numéro de téléphone doit etre valide" }),
+    city: z.string(),
+    country: z.string(),
     password: passwordSchema,
     confirmPassword: z
       .string()

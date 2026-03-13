@@ -9,11 +9,11 @@ export function useRegisterStepper(): RegisterStepperState {
       const [draft, setDraft] = useState<Partial<RegisterDraft>>(() => {
             if (typeof window === 'undefined') return {};
             const saved = localStorage.getItem(STORAGE_KEY);
-            return saved ? JSON.parse(saved) : { currentStep: 1 };
+            return saved ? JSON.parse(saved) : { currentStep: 0 };
       });
 
       const [currentStep, setCurrentStep] = useState<RegisterStep>(
-            (draft.currentStep as RegisterStep) || 1
+            (draft.currentStep as RegisterStep) || 0
       );
 
       const passwordRef = useRef<string>('');
