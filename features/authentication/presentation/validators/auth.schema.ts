@@ -25,9 +25,7 @@ export const passwordSchema = z
   .regex(/[0-9]/, { message: "validation.password.number" })
   .regex(/[^A-Za-z0-9]/, { message: "validation.password.special" });
 
-
 // Login
-
 export const loginSchema = z.object({
   email: emailSchema,
   password: z
@@ -38,6 +36,7 @@ export const loginSchema = z.object({
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 
+// Register
 export const registerSchema = z
   .object({
     firstName: z
@@ -53,9 +52,16 @@ export const registerSchema = z
     email: emailSchema,
     phoneNumber: z
       .string()
-      .regex(/^(0[1-9])([0-9]{8})$/, { message: "Le numéro de téléphone doit etre valide" }),
-    city: z.string(),
-    country: z.string(),
+      .min(1, { message: "validation.phoneNumber.required" }) 
+      .regex(/^(?:\+237|0)[1-9]\d{8}$/, { 
+        message: "validation.phoneNumber.invalid" 
+      }),
+    city: z
+      .string()
+      .min(1, { message: "validation.city.required" }),
+    country: z
+      .string()
+      .min(1, { message: "validation.country.required" }),
     password: passwordSchema,
     confirmPassword: z
       .string()
@@ -72,18 +78,14 @@ export const registerSchema = z
 
 export type RegisterFormData = z.infer<typeof registerSchema>;
 
-
 // Verify Email
-
 export const verifyEmailSchema = z.object({
   token: z.string().min(1, { message: "validation.token.required" }),
 });
 
 export type VerifyEmailFormData = z.infer<typeof verifyEmailSchema>;
 
-
 // Verify OTP
-
 export const verifyOtpSchema = z.object({
   otp: z
     .string()
@@ -93,9 +95,7 @@ export const verifyOtpSchema = z.object({
 
 export type VerifyOtpFormData = z.infer<typeof verifyOtpSchema>;
 
-
 // Reset Password
-
 export const resetPasswordSchema = z
   .object({
     token: z.string().min(1, { message: "validation.token.required" }),
@@ -111,18 +111,14 @@ export const resetPasswordSchema = z
 
 export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
 
-
 // Forgot Password
-
 export const forgotPasswordSchema = z.object({
   email: emailSchema,
 });
 
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 
-
 // Helper : force du mot de passe
-
 export type PasswordStrength = "weak" | "medium" | "strong";
 
 export function calculatePasswordStrength(password: string): PasswordStrength {

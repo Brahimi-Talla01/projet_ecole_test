@@ -1,47 +1,62 @@
-"use client";
+'use client';
 
-import { useState, FormEvent } from 'react';
-import { RegisterStepperState } from '@/shared/types/common.types';
+import { useCallback, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+import { RegisterFormData } from '../../validators/auth.schema';
 import { authRepository } from '@/features/authentication/data/repositories/AuthRepository';
 
-export function useRegisterStep1(stepper: RegisterStepperState) {
-      const [email, setEmail] = useState(stepper.draft.email || '');
-      const [error, setError] = useState<string | null>(null);
-      const [isLoading, setIsLoading] = useState(false);
+interface UseRegisterStep1Props {
+  onNext: () => void;
+}
 
-      const handleContinue = async (e: FormEvent) => {
-            e.preventDefault();
-            setError(null);
+interface UseRegisterStep1Return {
+  handleNext: () => Promise<void>;
+  isChecking: boolean;
+}
 
-            if (!email || !email.includes('@')) {
-                  setError("Veuillez entrer une adresse email valide.");
-                  return;
-            }
+export function useRegisterStep1({
+  onNext,
+}: UseRegisterStep1Props): UseRegisterStep1Return {
+  const { trigger, getValues, setError } = useFormContext<RegisterFormData>();
+  const t = useTranslations('authentication.register');
 
-            setIsLoading(true);
+  const [isChecking, setIsChecking] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-            try {
-                  // const isAvailable = await authRepository.checkEmailAvailability(email);
-                  const isAvailable = true;
+  const handleNext = useCallback(async () => {
+    const valid = await trigger('email');
+    if (!valid) return;
 
-                  if (isAvailable) {
-                        stepper.updateDraft({ email });
-                        stepper.goToStep(2);
-                  } else {
-                        setError("Cet email est déjà associé à un compte.");
-                  }
-            } catch (err) {
-                  setError("Impossible de vérifier l'email pour le moment. Réessayez.");
-            } finally {
-                  setIsLoading(false);
-            }
-      };
+    const email = getValues('email');
 
-      return {
-            email,
-            setEmail,
-            error,
-            isLoading,
-            handleContinue
-      };
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    setIsChecking(true);
+
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const available = await authRepository.checkEmailAvailability(email);
+
+        if (!available) {
+          setError('email', {
+            type: 'manual',
+            message: t('errors.emailTaken'),
+          });
+          return;
+        }
+
+        onNext();
+      } catch {
+        onNext();
+      } finally {
+        setIsChecking(false);
+      }
+    }, 400);
+  }, [trigger, getValues, setError, onNext, t]);
+
+  return {
+    handleNext,
+    isChecking,
+  };
 }
