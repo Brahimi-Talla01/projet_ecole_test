@@ -1,103 +1,104 @@
 "use client";
 
-import { Button } from '@/core/ui/atoms/Button';
-import { RegisterStepperState } from '@/shared/types/common.types';
-import { useRegisterStep2 } from '../../../hooks/register/useRegisterStep2';
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/core/ui/atoms/Button";
+import { Input } from "@/core/ui/atoms/Input";
+import { CITY_OPTIONS, COUNTRY_OPTIONS, RegisterStepperState } from "@/shared/types/common.types";
+import { useRegisterStep2 } from "../../../hooks/register/useRegisterStep2";
+import { useTranslations } from "next-intl";
+import { SelectField } from "@/core/ui/molecules/SelectField";
 
 interface RegisterStep2Props {
   stepper: RegisterStepperState;
 }
 
 export const RegisterStep2 = ({ stepper }: RegisterStep2Props) => {
-  const { formData, handleChange, handleContinue, handleBack } = useRegisterStep2(stepper);
+  const t = useTranslations("authentication.register");
+  const tValid = useTranslations("authentication.validation");
+  const {
+    formData,
+    errors,
+    handleChange,
+    handleSelectChange,
+    handleContinue,
+    handleBack,
+  } = useRegisterStep2(stepper);
 
   return (
-    <form onSubmit={handleContinue} className="flex flex-col flex-1 gap-6">
-      <div className="flex-1 space-y-4">
-        
-        {/* Prénom & Nom */}
-        <div className="grid grid-cols-1 tab:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gris-700">Prénom</label>
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              placeholder="Ex: Toto"
-              className="w-full p-3 rounded-lg border border-gris-200 focus:border-primary-500 focus:outline-none transition-all"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gris-700">Nom</label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              placeholder="Ex: Tata"
-              className="w-full p-3 rounded-lg border border-gris-200 focus:border-primary-500 focus:outline-none transition-all"
-              required
-            />
-          </div>
-        </div>
+    <div className="flex flex-col gap-6">
 
-        {/* Téléphone */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-gris-700">Numéro de téléphone</label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder="+237 6xx xxx xxx"
-            className="w-full p-3 rounded-lg border border-gris-200 focus:border-primary-500 focus:outline-none transition-all"
-            required
+      <button
+        type="button"
+        onClick={handleBack}
+        className="flex items-center gap-2 text-gris-500 hover:text-gris-800 transition-colors w-fit cursor-pointer"
+        aria-label="Retour"
+      >
+        <ArrowLeft size={18} />
+        <span className="text-sm font-medium">{t("cta.back")}</span>
+      </button>
+
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-gris-900">
+          Basic information
+        </h2>
+      </div>
+
+      <form onSubmit={handleContinue} className="flex flex-col gap-5">
+
+        <Input
+          label={t("fields.firstName")}
+          name="firstName"
+          type="text"
+          value={formData.firstName}
+          onChange={handleChange}
+          placeholder={t("placeholders.firstName")}
+          error={errors.firstName}
+        />
+
+        <Input
+          label={t("fields.lastName")}
+          name="lastName"
+          type="text"
+          value={formData.lastName}
+          onChange={handleChange}
+          placeholder={t("placeholders.lastName")}
+          error={errors.lastName}
+        />
+
+        <Input
+          label={t("fields.phoneNumber")}
+          name="phoneNumber"
+          type="tel"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          placeholder={t("placeholders.phoneNumber")}
+          error={errors.phoneNumber}
+        />
+
+        <div className="grid grid-cols-2 gap-4">
+          <SelectField
+            label={t("fields.city")}
+            options={CITY_OPTIONS}
+            value={formData.city}
+            onChange={(val) => handleSelectChange("city", val)}
+            placeholder="Select"
+            error={errors.city}
+          />
+          <SelectField
+            label={t("fields.country")}
+            options={COUNTRY_OPTIONS}
+            value={formData.country}
+            onChange={(val) => handleSelectChange("country", val)}
+            placeholder="Select"
+            error={errors.country}
           />
         </div>
 
-        {/* Ville & Pays */}
-        <div className="grid grid-cols-1 tab:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gris-700">Ville</label>
-            <input
-              type="text"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              placeholder="Ex: Douala"
-              className="w-full p-3 rounded-lg border border-gris-200 focus:border-primary-500 focus:outline-none transition-all"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gris-700">Pays</label>
-            <input
-              type="text"
-              name="country"
-              value={formData.country}
-              onChange={handleChange}
-              placeholder="Ex: Cameroun"
-              className="w-full p-3 rounded-lg border border-gris-200 focus:border-primary-500 focus:outline-none transition-all"
-              required
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <Button type="submit" fullWidth>
-          Continuer
+        <Button type="submit" fullWidth className="mt-2">
+          {t("cta.continue")}
         </Button>
-        <button
-          type="button"
-          onClick={handleBack}
-          className="text-gris-500 text-sm font-medium hover:text-gris-800 transition-colors py-2 cursor-pointer"
-        >
-          Retour à l'étape précédente
-        </button>
-      </div>
-    </form>
+
+      </form>
+    </div>
   );
 };

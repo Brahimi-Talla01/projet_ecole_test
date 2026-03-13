@@ -2,7 +2,7 @@ import { RegisterForm } from '@/features/authentication/presentation/components/
 
 export default function RegisterPage() {
       return (
-            <main className="flex min-h-screen items-center justify-center">
+            <main>
                   <RegisterForm /> 
             </main>
       );

@@ -1,23 +1,81 @@
 {
       "register": {
-            "title": "Create an account",
-            "subtitle": "Join our platform for free",
-            "firstName": "First name",
-            "lastName": "Last name",
-            "email": "Email address",
-            "password": "Password",
-            "confirmPassword": "Confirm password",
-            "acceptTerms": "I agree to the terms of service",
-            "submit": "Create my account",
-            "submitting": "Creating account...",
-            "alreadyHaveAccount": "Already have an account?",
-            "login": "Sign in",
-            "emailChecking": "Checking...",
-            "passwordStrength": {
-                  "label": "Password strength",
-                  "weak": "Weak",
-                  "medium": "Medium",
-                  "strong": "Strong"
+            "subtitle": "Join us!",
+            "description": "Local residents and professionals respond to all your needs.",
+            "emailPrompt": "Enter your email address to create an account.",
+            "cta": {
+                  "createAccount": "Create an account",
+                  "continue": "Continue",
+                  "back": "Back",
+                  "login": "Log in",
+                  "resendEmail": "Resend verification email",
+                  "googleLogin": "Continue with Google"
+            },
+            
+            "or": "Or",
+
+            "alreadyAccount": "Already have an account?",
+            "fields": {
+                  "email": "Email address",
+                  "firstName": "First name",
+                  "lastName": "Last name",
+                  "phoneNumber": "Phone number",
+                  "city": "City",
+                  "country": "Country",
+                  "password": "Password",
+                  "confirmPassword": "Confirm password"
+            },
+
+            "placeholders": {
+                  "email": "Enter email address",
+                  "firstName": "Enter your first name",
+                  "lastName": "Enter your last name",
+                  "phoneNumber": "+237 6XX XXX XXX",
+                  "city": "Select your city",
+                  "country": "Select your country",
+                  "password": "Create a password",
+                  "confirmPassword": "Confirm your password"
+            },
+
+            "steps": {
+                  "1": "Email",
+                  "2": "Identity",
+                  "3": "Password",
+                  "4": "Confirmation"
+            },
+
+            "step4": {
+                  "title": "Check your inbox",
+                  "description": "We sent a verification link to",
+                  "hint": "Click the link in the email to activate your account.",
+                  "noEmail": "Didn't receive the email?",
+                  "checkSpam": "Check your spam folder or"
+            },
+
+            "verifyEmail": {
+                  "success": "Email verified successfully!",
+                  "successHint": "You will be redirected shortly...",
+                  "expired": "This verification link has expired.",
+                  "invalid": "This verification link is invalid.",
+                  "resendSuccess": "A new verification email has been sent."
+            },
+
+            "errors": {
+                  "emailTaken": "This email address is already in use.",
+                  "emailInvalid": "Please enter a valid email address.",
+                  "emailRequired": "Email address is required.",
+                  "firstNameRequired": "First name is required.",
+                  "lastNameRequired": "Last name is required.",
+                  "phoneRequired": "Phone number is required.",
+                  "phoneInvalid": "Please enter a valid phone number.",
+                  "cityRequired": "City is required.",
+                  "countryRequired": "Country is required.",
+                  "passwordRequired": "Password is required.",
+                  "passwordWeak": "Password must be at least 8 characters, include an uppercase letter, a number and a special character.",
+                  "passwordMismatch": "Passwords do not match.",
+                  "termsRequired": "You must accept the terms and conditions.",
+                  "registerFailed": "Registration failed. Please try again.",
+                  "networkError": "Unable to reach the server. Check your connection."
             }
       },
 
@@ -73,6 +131,16 @@
             "otp": {
                   "length": "Code must be 6 digits",
                   "digits_only": "Code must contain digits only"
+            },
+             "phoneNumber": {
+                  "required": "Phone number is required",
+                  "invalid": "Invalid phone number (format: +237 6XX XXX XXX)"
+            },
+            "city": {
+                  "required": "City is required"
+            },
+            "country": {
+                  "required": "Country is required"
             }
       }
 }

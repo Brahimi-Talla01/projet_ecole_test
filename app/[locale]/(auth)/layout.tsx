@@ -1,3 +1,4 @@
+import { APP_CONFIG } from '@/core/config/constants';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
@@ -6,13 +7,13 @@ type Props = {
 };
 
 export const metadata: Metadata = {
-  title: 'SuperApp - Plateforme de services',
-  description: 'Mise en relation entre clients et prestataires',
+  title: APP_CONFIG.NAME,
+  description: APP_CONFIG.DESCRIPTION,
 };
 
 export default function AuthLayout({ children }: Props) {
   return (
-    <div className="auth-container min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <main>{children}</main>
     </div>
   );

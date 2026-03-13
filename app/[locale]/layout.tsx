@@ -7,7 +7,7 @@ import '../globals.css';
 import { Metadata } from 'next';
 import { QueryProvider } from '@/core/providers/Queryprovider';
 import { APP_CONFIG } from '@/core/config/constants';
-import { SessionProvider } from '@/core/providers/SessionProvider';
+// import { SessionProvider } from '@/core/providers/SessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -41,9 +41,7 @@ export default async function LocaleLayout({
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
-            <SessionProvider>
               {children}
-            </SessionProvider>
           </QueryProvider>
         </NextIntlClientProvider>
       </body>

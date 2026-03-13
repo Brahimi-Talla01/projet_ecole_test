@@ -1,23 +1,74 @@
 {
       "register": {
-            "title": "Créer un compte",
-            "subtitle": "Rejoignez notre plateforme gratuitement",
-            "firstName": "Prénom",
-            "lastName": "Nom",
-            "email": "Adresse email",
-            "password": "Mot de passe",
-            "confirmPassword": "Confirmer le mot de passe",
-            "acceptTerms": "J'accepte les conditions d'utilisation",
-            "submit": "Créer mon compte",
-            "submitting": "Création en cours...",
-            "alreadyHaveAccount": "Déjà un compte ?",
-            "login": "Se connecter",
-            "emailChecking": "Vérification...",
-            "passwordStrength": {
-                  "label": "Force du mot de passe",
-                  "weak": "Faible",
-                  "medium": "Moyen",
-                  "strong": "Fort"
+            "subtitle": "Rejoignez-nous !",
+            "description": "Les habitants et les professionnels de votre quartier répondent à tous vos besoins.",
+            "emailPrompt": "Entrez votre adresse e-mail pour créer un compte.",
+            "cta": {
+                  "createAccount": "Créer un compte",
+                  "continue": "Continuer",
+                  "back": "Retour",
+                  "login": "Se connecter",
+                  "resendEmail": "Renvoyer l'e-mail de vérification",
+                  "googleLogin": "Continuer avec Google"
+            },
+            "or": "Ou",
+            "alreadyAccount": "Vous avez déjà un compte ?",
+            "fields": {
+                  "email": "Adresse mail",
+                  "firstName": "Prénom",
+                  "lastName": "Nom",
+                  "phoneNumber": "Numéro de téléphone",
+                  "city": "Ville",
+                  "country": "Pays",
+                  "password": "Mot de passe",
+                  "confirmPassword": "Confirmer le mot de passe"
+            },
+            "placeholders": {
+                  "email": "Entrez votre adresse mail",
+                  "firstName": "Entrez votre prénom",
+                  "lastName": "Entrez votre nom",
+                  "phoneNumber": "+237 6XX XXX XXX",
+                  "city": "Sélectionnez votre ville",
+                  "country": "Sélectionnez votre pays",
+                  "password": "Créez un mot de passe",
+                  "confirmPassword": "Confirmez votre mot de passe"
+            },
+            "steps": {
+                  "1": "E-mail",
+                  "2": "Identité",
+                  "3": "Mot de passe",
+                  "4": "Confirmation"
+            },
+            "step4": {
+                  "title": "Vérifiez votre boîte mail",
+                  "description": "Nous avons envoyé un lien de vérification à",
+                  "hint": "Cliquez sur le lien dans l'e-mail pour activer votre compte.",
+                  "noEmail": "Vous n'avez pas reçu l'e-mail ?",
+                  "checkSpam": "Vérifiez vos spams ou"
+            },
+            "verifyEmail": {
+                  "success": "Adresse e-mail vérifiée avec succès !",
+                  "successHint": "Vous allez être redirigé(e) dans quelques instants...",
+                  "expired": "Ce lien de vérification a expiré.",
+                  "invalid": "Ce lien de vérification est invalide.",
+                  "resendSuccess": "Un nouvel e-mail de vérification a été envoyé."
+            },
+            "errors": {
+                  "emailTaken": "Cette adresse e-mail est déjà utilisée.",
+                  "emailInvalid": "Veuillez entrer une adresse e-mail valide.",
+                  "emailRequired": "L'adresse e-mail est obligatoire.",
+                  "firstNameRequired": "Le prénom est obligatoire.",
+                  "lastNameRequired": "Le nom est obligatoire.",
+                  "phoneRequired": "Le numéro de téléphone est obligatoire.",
+                  "phoneInvalid": "Veuillez entrer un numéro de téléphone valide.",
+                  "cityRequired": "La ville est obligatoire.",
+                  "countryRequired": "Le pays est obligatoire.",
+                  "passwordRequired": "Le mot de passe est obligatoire.",
+                  "passwordWeak": "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
+                  "passwordMismatch": "Les mots de passe ne correspondent pas.",
+                  "termsRequired": "Vous devez accepter les conditions d'utilisation.",
+                  "registerFailed": "L'inscription a échoué. Veuillez réessayer.",
+                  "networkError": "Impossible de joindre le serveur. Vérifiez votre connexion."
             }
       },
 
@@ -73,6 +124,16 @@
             "otp": {
                   "length": "Le code doit contenir 6 chiffres",
                   "digits_only": "Le code doit contenir uniquement des chiffres"
+            },
+            "phoneNumber": {
+                  "required": "Le numéro de téléphone est requis",
+                  "invalid": "Numéro de téléphone invalide (format: +237 6XX XXX XXX)"
+            },
+            "city": {
+                  "required": "La ville est requise"
+            },
+            "country": {
+                  "required": "Le pays est requis"
             }
       }
 }
